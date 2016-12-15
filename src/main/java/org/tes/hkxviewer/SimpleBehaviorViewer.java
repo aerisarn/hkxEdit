@@ -12,6 +12,7 @@ import org.tes.hkx.model.files.HkFilesFactory;
 import org.tes.hkx.tree.HKXTree;
 
 public class SimpleBehaviorViewer {
+	
 	public static void main(String[] args) throws Exception {
         System.out.println("Hello World!");
 
@@ -38,6 +39,7 @@ public class SimpleBehaviorViewer {
             hkbReadOnlyFile.setFileName(behaviorFilePath.getName());
             
             HKXTree rotree = new HKXTree(hkbReadOnlyFile.getRoot());
+            rotree.addTreeSelectionListener(new HKXTreeSelectionListener(rotree));
 
             // The JTree can get big, so allow it to scroll
             JScrollPane scrollpane = new JScrollPane(rotree);
@@ -48,30 +50,7 @@ public class SimpleBehaviorViewer {
             frame.setSize(400, 600);
             frame.setVisible(true);
             
-            //load a working copy
-            HkBehaviorFile hkbFile = new HkFilesFactory().loadTypedFile(behaviorFilePath, HkBehaviorFile.class);
-            hkbFile.setFileName(behaviorFilePath.getName());
-
-            //Do any modification
-
-            //Display modified tree
-            HKXTree mtree = new HKXTree(hkbFile.getRoot());
-
-            // The JTree can get big, so allow it to scroll
-            JScrollPane mscrollpane = new JScrollPane(mtree);
-
-            // Display it all in a window and make the window appear
-            JFrame mframe = new JFrame("MODIFIED: "+hkbFile.getFileName());
-            mframe.getContentPane().add(mscrollpane, "Center");
-            mframe.setSize(400, 600);
-            mframe.setVisible(true);
-
-            // Save
-            JFileChooser c = new JFileChooser();
-            int rVal = c.showSaveDialog(null);
-            if (rVal == JFileChooser.APPROVE_OPTION) {
-              factory.save(hkbFile, chooser.getSelectedFile());
-            }
+            
 
         } catch (Exception e) {
             // TODO Auto-generated catch block
@@ -79,4 +58,6 @@ public class SimpleBehaviorViewer {
         }
 
     }
+
+	
 }

@@ -8,6 +8,7 @@ import javax.swing.JTree;
 import javax.swing.event.TreeModelListener;
 import javax.swing.tree.TreeModel;
 import javax.swing.tree.TreePath;
+import javax.swing.tree.TreeSelectionModel;
 
 import org.tes.hkx.lib.HkobjectType;
 import org.tes.hkx.model.IHkContainer;
@@ -23,6 +24,7 @@ public class HKXTree extends JTree {
 	public HKXTree(HkobjectType c) {
 		super(new HKXTreeModel(c));
 		setCellRenderer(new HKXTreeRenderer(getCellRenderer()));
+		getSelectionModel().setSelectionMode(TreeSelectionModel.SINGLE_TREE_SELECTION);
 	}
 
 	static class HKXTreeModel implements TreeModel {
