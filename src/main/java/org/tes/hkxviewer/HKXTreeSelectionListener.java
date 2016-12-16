@@ -21,6 +21,10 @@ public class HKXTreeSelectionListener implements TreeSelectionListener {
 	public HKXTreeSelectionListener(JTree tree) {
 		this.tree = tree;
 	}
+	
+	public void setTree(JTree tree) {
+		this.tree = tree;
+	}
 
 	@Override
 	public void valueChanged(TreeSelectionEvent e) {
